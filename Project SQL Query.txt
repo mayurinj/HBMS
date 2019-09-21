@@ -1,0 +1,22 @@
+Users Table
+-----------
+
+create table Users( user_id varchar2(4) PRIMARY KEY, password varchar2(7) NOT NULL, role varchar2(10) NOT NULL,  user_name varchar2 (20) NOT NULL, mobile_no varchar2(10) NOT NULL, phone varchar2(10), address varchar2(25) NOT NULL, email varchar2(15));
+
+
+Hotel Table
+-----------
+
+Create table Hotel( hotel_id varchar2(4) PRIMARY KEY, city varchar2(10) NOT NULL, hotel_name varchar2 (20) NOT NULL, address varchar2(25) NOT NULL, description varchar2(50), avg_rate_per_night number(10,2) NOT NULL, phone_no1 varchar2(10) NOT NULL, phone_no2 varchar2(10), rating varchar2(4), email varchar2(15), fax varchar2(15));
+
+
+RoomDetails
+-----------
+
+Create table RoomDetails( hotel_id varchar2(4) REFERENCES Hotel (hotel_id) NOT NULL,  room_id varchar2(4) PRIMARY KEY,  room_no varchar2(3) NOT NULL, room_type varchar2(20) NOT NULL,  per_night_rate  number(6,2) NOT  NULL, availability char(1) check (availability in ('Y', 'N')));
+
+
+BookingDetails
+--------------
+
+Create table  BookingDetails( booking_id varchar(4) Primary Key, room_id varchar(4) REFERENCES RoomDetails(room_id) NOT NULL,  user_id varchar(4) REFERENCES Users(user_id) NOT NULL, booked_from date NOT NULL, booked_to date NOT NULL, no_of_adults number(2) NOT NULL, no_of_children number(2) , amount number(6,2) NOT NULL);
